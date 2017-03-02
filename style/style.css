@@ -1,0 +1,26 @@
+h1 {
+    text-align: center;
+    font-family: "Courier New";
+    color: #e98000;
+}
+
+p {
+    font-style: italic;
+    text-align: center;
+    font-size: 1em;
+    color: #b2b2b2;
+}
+.cat-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+
+#click {
+    font-size: 3.5em;
+    text-align: center;
+    font-family: "Courier New";
+    margin-top: 1.5%;
+}
