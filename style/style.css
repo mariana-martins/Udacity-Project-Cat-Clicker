@@ -4,22 +4,24 @@ h1 {
     color: #e98000;
 }
 
-p {
+#desc {
     font-style: italic;
     text-align: center;
     font-size: 1em;
     color: #b2b2b2;
 }
 .cat-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     cursor: pointer;
 }
 
+.cats-name {
+    color: #e98000;
+    font-family: Arial;
+    font-size: 2em;
+}
 
-#click {
-    font-size: 3.5em;
+.cat-counter {
+    font-size: 2em;
     text-align: center;
     font-family: "Courier New";
     margin-top: 1.5%;
