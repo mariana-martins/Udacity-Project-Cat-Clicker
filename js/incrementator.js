@@ -1,55 +1,76 @@
-/* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-}
-
-/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-}
-
-function criaCounter(catName) {
-    var count = 0;
+// Counter
+function criaCounter(cat) {
     return function () {
-        count++;
+        cat.counter++;
 
-        $("#click-"+catName).text(count);
+        $("#click-"+cat.name).text(cat.counter);
 
         var back = ["#e98000","#5b9c31","#e55fc1", "#1fffaf", "#ff6f61", "#7057df", "#f2b51a", "#fef65b"];
         var rand = back[Math.floor(Math.random() * back.length)];
-        $("#click-"+catName).css('color',rand);
+        $("#click-"+cat.name).css('color',rand);
     }
+}
+
+function mostraCat (myCat) {
+    $('#big-cat').html("");
+    var bigCat = "<img class='cat-big' src='" + myCat.img + "' id='big-" + myCat.name +"'>";
+    $("#big-cat").append(bigCat);
+
+    var kittenTitle = "<p class='cats-name'>" + myCat.name + "</p>";
+    $("#big-cat").append(kittenTitle);
+
+    $("#big-cat").append("<p id='click-"+ myCat.name +"' class='cat-counter'>"+myCat.counter+"</p>");
+
+    $("#big-"+myCat.name).click(criaCounter(myCat));
 }
 
 var cats = {
   cat: [
       {
           name: "Locki",
-          img:"img/cat-1.jpg"
+          img:"img/cat-1.jpg",
+          counter: 0
       },
       {
           name: "Charlie",
-          img:"img/cat-2.jpg"
+          img:"img/cat-2.jpg",
+          counter: 0
+      },
+      {
+          name: "Jessie",
+          img:"img/cat-3.jpg",
+          counter: 0
+      },
+      {
+          name: "Grumpy",
+          img:"img/cat-4.jpg",
+          counter: 0
+      },
+      {
+          name: "Toby",
+          img:"img/cat-5.jpg",
+          counter: 0
+      },
+      {
+          name: "Boo",
+          img:"img/cat-6.jpg",
+          counter: 0
       }
   ],
   display: function() {
-      for (kitten in cats.cat) {
-          var kittenName = cats.cat[kitten].name;
-          var kittenTitle = "<p class='cats-name'>" + kittenName  + "</p>";
-          $("#desc").append(kittenTitle);
+      cats.cat.forEach(function(myCat) {
+          var kittenName = myCat.name;
 
-          var kittenImage = "<img class='cat-img' src='" + cats.cat[kitten].img + "' alt='Cat image' id='" + kittenName +"'>";
-          $("#desc").append(kittenImage);
+          var kittenImage = "<img class='cat-small' src='" + myCat.img + "' id='" + kittenName +"'>";
+          $("#cat-list").append(kittenImage);
 
-          $("#desc").append("<p id='click-"+ kittenName +"' class='cat-counter'></p>");
+          $("#"+kittenName).click(function () {
+              mostraCat(myCat);
+          });
+      });
 
-          $("#"+kittenName).click(criaCounter(kittenName));
-      }
+      mostraCat(cats.cat[0]);
   }
 };
 
 cats.display();
-
-
