@@ -1,5 +1,4 @@
 
-
 var model = {
     cats: [
         {
@@ -34,6 +33,7 @@ var model = {
         }
     ],
     currentCat: {},
+    adminMode: false,
 
     init: function() {
         this.currentCat = this.cats[0];
@@ -47,8 +47,16 @@ var model = {
         return this.currentCat;
     },
 
-    changeCurrentCat: function(newCat) {
+    setCurrentCat: function(newCat) {
         this.currentCat = newCat;
+    },
+
+    setAdminMode: function (value) {
+        this.adminMode = value;
+    },
+
+    getAdminMode: function() {
+        return this.adminMode;
     }
 };
 
@@ -66,12 +74,29 @@ var octopus = {
         return model.getCurrentCat();
     },
 
-    changeCurrentCat: function(newCat) {
-        model.changeCurrentCat(newCat);
+    setCurrentCat: function(newCat) {
+        model.setCurrentCat(newCat);
     },
 
     incrementCurrentCat:function() {
         model.getCurrentCat().counter++;
+    },
+    activeAdminMode: function() {
+        model.setAdminMode(true);
+        return model.getAdminMode();
+    },
+    desactiveAdminMode : function () {
+        model.setAdminMode(false);
+        return model.getAdminMode();
+    },
+    updateCurrentCat: function (newName, newImg, newCounter) {
+        var cat = model.getCurrentCat();
+
+        cat.name = newName;
+        cat.img = newImg;
+        cat.counter = newCounter;
+
+        return cat;
     }
 };
 
@@ -80,6 +105,7 @@ var view = {
     init: function() {
         octopus.init();
         this.display();
+        this.addEvents();
     },
 
     display: function() {
@@ -89,6 +115,7 @@ var view = {
 
     displayCatList: function () {
         var catList = $("#cat-list");
+        catList.html("");
         octopus.getAllCats().forEach(function (myCat) {
 
             var kittenName = myCat.name;
@@ -98,8 +125,9 @@ var view = {
             catList.append(elememt);
 
             $("#" + kittenName).click(function () {
-                octopus.changeCurrentCat(myCat);
+                octopus.setCurrentCat(myCat);
                 view.displayCat();
+                view.exitAdminMode();
             });
         });
     },
@@ -138,6 +166,35 @@ var view = {
         var back = ["#e98000", "#5b9c31", "#e55fc1", "#1fffaf", "#ff6f61", "#7057df", "#f2b51a", "#fef65b"];
         var rand = back[Math.floor(Math.random() * back.length)];
         counterElement.css('color', rand);
+    },
+    exitAdminMode: function () {
+        var isActive = octopus.desactiveAdminMode();
+        if (isActive === false){
+            $("#admin-form").hide();
+        }
+    },
+    addEvents: function () {
+        $("#admin").click(function() {
+            var isActive = octopus.activeAdminMode();
+            if (isActive === true) {
+                var cat = octopus.getCurrentCat();
+                $("#cat-name-input").val(cat.name);
+                $("#cat-url-input").val(cat.img);
+                $("#cat-counter-input").val(cat.counter);
+
+                $("#admin-form").show();
+            }
+        });
+        $("#cancel").click(view.exitAdminMode);
+        $("#save").click(function () {
+            var newName = $("#cat-name-input").val();
+            var newImg = $("#cat-url-input").val();
+            var newCounter = $("#cat-counter-input").val();
+
+            var x = octopus.updateCurrentCat(newName,newImg,newCounter);
+            view.exitAdminMode();
+            view.display();
+        });
     }
 };
 
