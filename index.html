@@ -6,41 +6,16 @@
 
     <link rel="stylesheet" href="style/style.css">
 </head>
-    <!--Sidebar, the images content are inserting-->
-    <div id="mySidenav" class="sidenav">
-        <h2 id="cat-list">More Cats</h2>
-    </div>
-
-    <div id="main">
-        <!-- Title -->
-        <h1>Cat Clicker Premium Pro</h1>
-        <!-- Inserting image, Cat name and Counter -->
-        <div id="big-cat">
-
-        </div>
-        <!-- Admin Button -->
-        <button id="admin">Admin</button>
-        <!-- Form with informations about name, image and counter. This form is hide. -->
-        <form id="admin-form">
-            <fieldset>
-                <div>
-                    <label for="cat-name-input">Cat Name: </label>
-                    <input id="cat-name-input" type="text">
-                </div>
-                <div>
-                    <label for="cat-url-input">Url: </label>
-                    <input id="cat-url-input" type="url">
-                </div>
-                <div>
-                    <label for="cat-counter-input">Counter:</label>
-                    <input id="cat-counter-input" type="number">
-                </div>
-            </fieldset>
-            <input type="button" value="cancel" id="cancel"> <input value="save" type="submit" id="save">
-        </form>
-    </div>
 <body>
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/incrementator.js"></script>
+    <ul id="cat-list"></ul>
+    <div id="cat">
+
+        <h2 id="cat-name"></h2>
+        <div id="cat-count"></div>
+        <img id="cat-img" src="" alt="cute cat">
+
+    </div>
+    <script src="js/knockout-3.4.2.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
