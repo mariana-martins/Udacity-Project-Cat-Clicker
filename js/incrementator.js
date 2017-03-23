@@ -1,3 +1,8 @@
+// This is an old code. He is an example of code organization in MVO (Model View Octopus).
+// In this case, the octopus is applied instead of the ViewModel(MVVM)  or Controllers (MVC).
+
+
+/*
 
 var model = {
     cats: [
@@ -199,3 +204,4 @@ var view = {
 };
 
 view.init();
+*/
