@@ -4,28 +4,59 @@
     <meta charset="UTF-8">
     <title>Cat Clicker</title>
 
-    <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/bootstrap-css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+
 </head>
 <body>
-    <ul data-bind="foreach: catList">
-        <li data-bind="text: name, click: $parent.setCat"></li>
-    </ul>
-    <div data-bind="with:currentCat">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#cats" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Cat Clicker</a>
+            </div>
 
-        <h2 data-bind="text: name"></h2>
-        <h3 data-bind="text: title"></h3>
-        <div data-bind="text: clickCount"></div>
-        <img src="" alt="cute cat" data-bind="click: $parent.incrementCounter, attr: {src: imgSrc}">
-        <div>
-            <h3>Nicknames: </h3>
-            <ul data-bind="foreach: nicknames">
-                <li data-bind="text: $data"></li>
-            </ul>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="cats">
+                <ul class="nav navbar-nav navbar-right" data-bind="foreach: catList">
+                    <li ><a href="#" data-bind="text: name, click: $parent.setCat"></a></li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <main data-bind="with:currentCat">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1  class="text-center" data-bind="text: name"></h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <img  src=""  class="img-responsive center-block" alt="cute cat" data-bind="click: $parent.incrementCounter, attr: {src: imgSrc}">
+                    </div>
+                    <div class="col-md-4 ">
+                        <h5>Age:</h5>
+                        <p data-bind="text: title"></p>
+                        <h5>Nicknames: </h5>
+                        <ul data-bind="foreach: nicknames">
+                            <li data-bind="text: $data"></li>
+                        </ul>
+                        <h5>Counting:</h5>
+                        <p data-bind="text: clickCount"></p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <script src="js/knockout-3.4.2.js" type="text/javascript"></script>
+    </main>
     <script src="js/bootstrap-js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/knockout-3.4.2.js" type="text/javascript"></script>
     <script src="js/app.js" type="text/javascript"></script>
 </body>
 </html>
